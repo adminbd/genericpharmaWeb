@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ContentHeaderService } from '../../servicios/content-header.service';
-import { SessionService } from '../../servicios/session.service';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +7,11 @@ import { SessionService } from '../../servicios/session.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private _contentHeaderService: ContentHeaderService,
-              private _sessionService: SessionService) {
+  constructor(private _contentHeaderService: ContentHeaderService) {
   }
 
   ngOnInit() {
     this._contentHeaderService.setTitleHeader('Pagina principal');
-    this._sessionService.getUsers();
   }
 
 }

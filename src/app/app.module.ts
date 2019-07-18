@@ -9,6 +9,7 @@ import { APP_ROUTING } from './app.routes';
 // servicios
 import { ContentHeaderService } from './servicios/content-header.service';
 import { SessionService } from './servicios/session.service';
+import { ProductosService } from './servicios/productos.service';
 
 // componentes
 import { AppComponent } from './app.component';
@@ -44,7 +45,8 @@ import { ProfileComponent } from './components/shared/profile/profile.component'
   ],
   providers: [
     ContentHeaderService,
-    SessionService
+    SessionService,
+    ProductosService
   ],
   bootstrap: [AppComponent]
 })

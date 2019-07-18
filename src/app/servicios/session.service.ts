@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { API_URL } from '../../constants';
 
 @Injectable()
 export class SessionService {
@@ -17,8 +18,8 @@ export class SessionService {
     }
         
     getUsers() {
-      const url = "http://localhost:1080/api/Articulos/UserInfo";
-      return this.http.get(url)
+      const request = "Articulos/UserInfo";
+      return this.http.get(API_URL + request)
           .subscribe( res => console.log(res));
     }
 }

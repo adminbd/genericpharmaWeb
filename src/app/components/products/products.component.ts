@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContentHeaderService } from '../../servicios/content-header.service';
+import { ProductosService } from '../../servicios/productos.service';
 
 @Component({
   selector: 'app-products',
@@ -22,9 +23,13 @@ export class ProductsComponent implements OnInit {
     {"id": 110, "firstName": "Lopa", "lastName": "Mudra"},
     {"id": 111, "firstName": "Paramanand","lastName": "Tripathi"}
   ];
-  constructor(private _contentHeaderService: ContentHeaderService) { }
+  constructor(private _contentHeaderService: ContentHeaderService,
+              private _productService: ProductosService) { }
 
   ngOnInit() {
+
+    this._productService.getProductos().subscribe( res => console.log(res));
+
     this._contentHeaderService.setTitleHeader('Productos');
     this.dtOptions = {
       data:this.dtUsers,
