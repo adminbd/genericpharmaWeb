@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { DataTablesModule } from 'angular-datatables';
 
 // rutas
 import { APP_ROUTING } from './app.routes';
@@ -38,7 +39,8 @@ import { ProfileComponent } from './components/shared/profile/profile.component'
   imports: [
     BrowserModule,
     HttpClientModule,
-    APP_ROUTING
+    APP_ROUTING,
+    DataTablesModule
   ],
   providers: [
     ContentHeaderService,
