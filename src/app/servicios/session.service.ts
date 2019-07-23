@@ -8,7 +8,7 @@ export class SessionService {
     user: any = {
       name: 'nuevo',
       lastName: 'usuario',
-      imgUrl: 'assets/dist/img/avatar.png'
+      imgUrl: 'assets/dist/img/avatar5.png'
     }
 
     constructor(private http: HttpClient) {}
