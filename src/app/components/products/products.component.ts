@@ -39,7 +39,7 @@ export class ProductsComponent implements OnInit {
     this.products = res;
     console.log(this.products);
   }
-
+s
   ngOnInit() {
     
     this._contentHeaderService.setTitleHeader('Articulos');
