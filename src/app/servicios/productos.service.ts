@@ -8,7 +8,7 @@ export class ProductosService {
   constructor(private http: HttpClient) { }
 
   getProductos() {
-    const request = "Productos/"
+    const request = "Articulo/"
     return this.http.get(API_URL + request);
   }
 }
