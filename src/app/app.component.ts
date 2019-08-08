@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,6 @@ export class AppComponent {
   fullLayout: boolean = true;
 
   constructor(private router: Router) {
-    console.log("Ruta actual: ", this.router.url);
-    
+
   }
 }

@@ -28,7 +28,10 @@
               "src/assets/bower_components/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/bower_components/font-awesome/css/font-awesome.min.css",
               "src/assets/bower_components/Ionicons/css/ionicons.min.css",
-              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "src/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css",
+              "src/assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css",
+              "src/assets/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css",
+              "src/assets/plugins/timepicker/bootstrap-timepicker.min.css",
               "src/assets/dist/css/AdminLTE.min.css",
               "src/assets/dist/css/skins/skin-green.min.css"
             ],
@@ -36,7 +39,10 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
               "src/assets/bower_components/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/datatables.net/js/jquery.dataTables.js",
+              "src/assets//bower_components/moment/min/moment.min.js",
+              "src/assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
+              "src/assets//bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js",
+              "src/assets/plugins/timepicker/bootstrap-timepicker.min.js",
               "src/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js",
               "src/assets/bower_components/fastclick/lib/fastclick.js",
               "src/assets/dist/js/adminlte.min.js"

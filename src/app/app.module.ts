@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { DataTablesModule } from 'angular-datatables';
 
 // rutas
 import { APP_ROUTING } from './app.routes';
@@ -9,7 +9,7 @@ import { APP_ROUTING } from './app.routes';
 // servicios
 import { ContentHeaderService } from './servicios/content-header.service';
 import { SessionService } from './servicios/session.service';
-import { ProductosService } from './servicios/productos.service';
+import { ArticulosService } from './servicios/articulos.service';
 
 // componentes
 import { AppComponent } from './app.component';
@@ -22,7 +22,8 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { ContentHeaderComponent } from './components/shared/content-header/content-header.component';
 import { LoginComponent } from './components/shared/login/login.component';
 import { ProfileComponent } from './components/shared/profile/profile.component';
-
+import { CategoryComponent } from './components/category/category.component';
+import { SupplierComponent } from './components/supplier/supplier.component';
 
 @NgModule({
   declarations: [
@@ -35,18 +36,20 @@ import { ProfileComponent } from './components/shared/profile/profile.component'
     FooterComponent,
     ContentHeaderComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    CategoryComponent,
+    SupplierComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     APP_ROUTING,
-    DataTablesModule
+    FormsModule
   ],
   providers: [
     ContentHeaderService,
     SessionService,
-    ProductosService
+    ArticulosService
   ],
   bootstrap: [AppComponent]
 })
