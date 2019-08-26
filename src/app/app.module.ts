@@ -2,9 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // rutas
-import { APP_ROUTING } from './app.routes';
+import { AppRoutingModule } from './app-routing.module';
 
 // servicios
 import { ContentHeaderService } from './servicios/content-header.service';
@@ -24,6 +27,7 @@ import { LoginComponent } from './components/shared/login/login.component';
 import { ProfileComponent } from './components/shared/profile/profile.component';
 import { CategoryComponent } from './components/category/category.component';
 import { SupplierComponent } from './components/supplier/supplier.component';
+import { RegisterComponent } from './components/shared/register/register.component';
 
 @NgModule({
   declarations: [
@@ -38,13 +42,17 @@ import { SupplierComponent } from './components/supplier/supplier.component';
     LoginComponent,
     ProfileComponent,
     CategoryComponent,
-    SupplierComponent
+    SupplierComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    APP_ROUTING,
-    FormsModule
+    AppRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    NgbModule
   ],
   providers: [
     ContentHeaderService,

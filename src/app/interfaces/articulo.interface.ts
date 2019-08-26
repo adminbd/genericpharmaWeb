@@ -7,5 +7,6 @@ export interface Articulo {
     imagen: string,
     vencimiento: Date,
     idPaquete: string,
-    idClasificacion: string
+    idClasificacion: string,
+    formData?: any
 }

@@ -19,20 +19,11 @@
             <!-- Optionally, you can add icons to the links -->
             <li routerLinkActive="active"><a [routerLink]="['home']"><i class="fa fa-home"></i> <span>Inicio</span></a>
             </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-cubes"></i> <span>Almacen</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li routerLinkActive="active"><a [routerLink]="['supplier']">Proveedores</a></li>
-                    <li routerLinkActive="active"><a [routerLink]="['category']">Categorias</a></li>
-                    <li routerLinkActive="active"><a [routerLink]="['products']">Articulos</a></li>
-                    <li routerLinkActive="active"><a [routerLink]="['about']">AcercaDe</a></li>
-                </ul>
-            </li>
+            <li class="header">ALMACEN</li>
+            <li routerLinkActive="active"><a [routerLink]="['supplier']"><i class="fa fa-list"></i> <span>Proveedores</span></a></li>
+            <li routerLinkActive="active"><a [routerLink]="['category']"><i class="fa fa-folder"></i> <span>Categorias</span></a></li>
+            <li routerLinkActive="active"><a [routerLink]="['products']"><i class="fa fa-cubes"></i> <span>Articulos</span></a></li>
+            <li routerLinkActive="active"><a [routerLink]="['about']"><i class="fa fa-question-circle"></i> <span>Acercade</span></a></li>
         </ul>
         <!--.sidebar-menu -->
     </section>
