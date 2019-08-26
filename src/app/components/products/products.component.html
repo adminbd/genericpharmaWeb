@@ -39,20 +39,13 @@
                                 <td>{{ art.Descripcion }}</td>
                                 <td>{{ art.Vencimiento | date:'d-MMM-y' }}</td>
                                 <td><button type="button" (click)="editItem(art)" class="btn btn-success btn-flat btnStyles" data-toggle="modal" data-target="#modal-default">Editar</button>
-                                    <button type="button" (click)="deleteItem(art)" class="btn btn-danger btn-flat btnStyles">Eliminar</button></td>
+                                    <button type="button" (click)="deleteItem(art)" class="btn btn-danger btn-flat btnStyles">Eliminar</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="box-footer clearfix">
-                    <ul class="pagination pagination-md no-margin pull-right">
-                        <li><a>&laquo;</a></li>
-                        <li><a>1</a></li>
-                        <li><a>2</a></li>
-                        <li><a>3</a></li>
-                        <li><a>&raquo;</a></li>
-                    </ul>
-                </div>
+
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->

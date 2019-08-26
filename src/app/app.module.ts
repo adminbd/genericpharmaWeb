@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 // rutas
 import { AppRoutingModule } from './app-routing.module';
@@ -52,6 +53,7 @@ import { RegisterComponent } from './components/shared/register/register.compone
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    SweetAlert2Module.forRoot(),
     NgbModule
   ],
   providers: [

@@ -4,6 +4,7 @@ import { ArticulosService } from '../../servicios/articulos.service';
 import { Articulo } from 'src/app/interfaces/articulo.interface';
 import { ToastrService } from 'ngx-toastr';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -42,6 +43,7 @@ export class ProductsComponent implements OnInit {
   selectedFile: ImageSnippet;
   formDataFile: FormData;
   model: any;
+  title = 'sweetAlert'
 
   constructor(private _contentHeaderService: ContentHeaderService,
     private _articuloService: ArticulosService,
@@ -151,11 +153,31 @@ export class ProductsComponent implements OnInit {
   }
 
   deleteItem(art: any) {
-    this._articuloService.eliminarArticulo(art.Id).subscribe(status => {
-      if (status) {
-        this.loadDataProducts();
+    Swal.fire({
+      title: `Desea eliminar ${art.Nombre}?`,
+      text: "Esta accion no puede revertirse!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Eliminar!'
+    }).then((result) => {
+      if (result.value) {
+        this._articuloService.eliminarArticulo(art.Id).subscribe(status => {
+          if (status == 'success') {
+            Swal.fire(
+              'Eliminado!',
+              'Registro eliminado de manera exitosa.',
+              'success'
+            )
+            this.loadDataProducts();
+          }
+        });
+      } else {
+
       }
-    });
+    })
   }
 
   processFile(img: any) {
