@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ContentHeaderService } from './servicios/content-header.service';
 import { SessionService } from './servicios/session.service';
 import { ArticulosService } from './servicios/articulos.service';
+import { ProveedorService } from './servicios/proveedor.service';
 
 // componentes
 import { AppComponent } from './app.component';
@@ -59,7 +60,8 @@ import { RegisterComponent } from './components/shared/register/register.compone
   providers: [
     ContentHeaderService,
     SessionService,
-    ArticulosService
+    ArticulosService,
+    ProveedorService
   ],
   bootstrap: [AppComponent]
 })

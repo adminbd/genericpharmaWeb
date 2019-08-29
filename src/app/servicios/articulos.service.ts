@@ -22,6 +22,10 @@ export class ArticulosService {
   getClasificacion() {
     return this.http.get(environment.apiURL + '/Clasificacion').toPromise();
   }
+  
+  getProveedor() {
+    return this.http.get(environment.apiURL+'/Proveedor');
+  }
 
   nuevoArticulo(articulo: Articulo) {
     return this.http.post(environment.apiURL + '/Articulos', articulo, { headers });

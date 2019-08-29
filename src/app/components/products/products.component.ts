@@ -33,12 +33,14 @@ export class ProductsComponent implements OnInit {
     imagen: "",
     vencimiento: null,
     idPaquete: "",
-    idClasificacion: ""
+    idClasificacion: "",
+    idProveedor: "",
   };
   titleModal: string;
   dtItems: any[] = [];
   paquetes: any[] = [];
   clasificacion: any[] = [];
+  proveedores: any[] = [];
   // loadAPI: Promise<any>;
   selectedFile: ImageSnippet;
   formDataFile: FormData;
@@ -104,6 +106,13 @@ export class ProductsComponent implements OnInit {
         this.clasificacion.push(data[key$]);
       }
     });
+
+    // proveedor
+    this._articuloService.getProveedor().subscribe(data => {
+      for (let key$ in data) {
+        this.proveedores.push(data[key$]);
+      }
+    });
   }
 
   formatDate(date: any) {
@@ -126,7 +135,8 @@ export class ProductsComponent implements OnInit {
       imagen: "",
       vencimiento: null,
       idPaquete: "",
-      idClasificacion: ""
+      idClasificacion: "",
+      idProveedor: ""
     };
   }
 
@@ -148,7 +158,8 @@ export class ProductsComponent implements OnInit {
       imagen: art.Imagen,
       vencimiento: new Date(currentDate.join('/')),
       idPaquete: art.IdPaquete,
-      idClasificacion: art.IdClasificacion
+      idClasificacion: art.IdClasificacion,
+      idProveedor: art.IdProveedor
     };
   }
 
@@ -185,14 +196,14 @@ export class ProductsComponent implements OnInit {
     const file: File = img.files[0];
     const reader = new FileReader();
 
-    reader.addEventListener('load', (event: any) => {
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-      const formData = new FormData();
-      const image: File = this.selectedFile.file;
-      formData.append('image', image);
-      this.item.formData = formData;
-      this.formDataFile = formData;
-    });
+    // reader.addEventListener('load', (event: any) => {
+    //   this.selectedFile = new ImageSnippet(event.target.result, file);
+    //   const formData = new FormData();
+    //   const image: File = this.selectedFile.file;
+    //   formData.append('image', image);
+    //   this.item.formData = formData;
+    //   this.formDataFile = formData;
+    // });
 
   }
 
@@ -236,6 +247,5 @@ export class ProductsComponent implements OnInit {
         }
       });
     }
-
   }
 }

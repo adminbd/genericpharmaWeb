@@ -126,6 +126,16 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-6">
+                                            <label>Proveedor</label>
+                                            <select name="proveedor" [(ngModel)]="item.idProveedor" class="form-control" required>
+                                                <option value="">Seleccione el proveedor</option>
+                                                <option *ngFor="let prov of proveedores" [value]="prov.Id">
+                                                    {{ prov.Nombre }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="box-footer">
                                     <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Cancelar</button>

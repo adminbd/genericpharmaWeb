@@ -34,7 +34,7 @@
                             "src/assets/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css",
                             "src/assets/plugins/timepicker/bootstrap-timepicker.min.css",
                             "src/assets/dist/css/AdminLTE.min.css",
-                            "src/assets/dist/css/skins/skin-green.min.css"
+                            "src/assets/dist/css/skins/_all-skins.min.css"
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.min.js",

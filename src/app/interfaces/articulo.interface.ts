@@ -8,5 +8,5 @@ export interface Articulo {
     vencimiento: Date,
     idPaquete: string,
     idClasificacion: string,
-    formData?: any
+    idProveedor?: any
 }
