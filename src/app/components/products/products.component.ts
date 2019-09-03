@@ -6,11 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 
-class ImageSnippet {
-  constructor(public src: string, public file: File) { }
-}
-
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -28,24 +23,25 @@ export class ProductsComponent implements OnInit {
     id: 0,
     codigo: "",
     nombre: "",
-    stock: 0,
+    stock: null,
     descripcion: "",
     imagen: "",
     vencimiento: null,
     idPaquete: "",
     idClasificacion: "",
     idProveedor: "",
+    precioCompra: null,
+    precioVenta: null,
   };
+  title = 'sweetAlert'
   titleModal: string;
   dtItems: any[] = [];
   paquetes: any[] = [];
   clasificacion: any[] = [];
   proveedores: any[] = [];
-  // loadAPI: Promise<any>;
-  selectedFile: ImageSnippet;
-  formDataFile: FormData;
   model: any;
-  title = 'sweetAlert'
+  fileToUpload: File = null;
+  // loadAPI: Promise<any>;
 
   constructor(private _contentHeaderService: ContentHeaderService,
     private _articuloService: ArticulosService,
@@ -130,13 +126,15 @@ export class ProductsComponent implements OnInit {
       id: 0,
       codigo: "",
       nombre: "",
-      stock: 0,
+      stock: null,
       descripcion: "",
       imagen: "",
       vencimiento: null,
       idPaquete: "",
       idClasificacion: "",
-      idProveedor: ""
+      idProveedor: "",
+      precioCompra: null,
+      precioVenta: null,
     };
   }
 
@@ -159,7 +157,9 @@ export class ProductsComponent implements OnInit {
       vencimiento: new Date(currentDate.join('/')),
       idPaquete: art.IdPaquete,
       idClasificacion: art.IdClasificacion,
-      idProveedor: art.IdProveedor
+      idProveedor: art.IdProveedor,
+      precioCompra: art.precioCompra,
+      precioVenta: art.precioVenta
     };
   }
 
@@ -191,20 +191,8 @@ export class ProductsComponent implements OnInit {
     })
   }
 
-  processFile(img: any) {
-    // debugger;
-    const file: File = img.files[0];
-    const reader = new FileReader();
-
-    // reader.addEventListener('load', (event: any) => {
-    //   this.selectedFile = new ImageSnippet(event.target.result, file);
-    //   const formData = new FormData();
-    //   const image: File = this.selectedFile.file;
-    //   formData.append('image', image);
-    //   this.item.formData = formData;
-    //   this.formDataFile = formData;
-    // });
-
+  processFile(files: FileList) {
+      this.fileToUpload = files.item(0);
   }
 
   guardar() {
@@ -219,7 +207,7 @@ export class ProductsComponent implements OnInit {
       this.item.vencimiento = new Date(selectedDate.join('/'));
 
       // ejecuta el servicio para guardar la informacion en el servidor
-      this._articuloService.nuevoArticulo(this.item).subscribe(data => {
+      this._articuloService.nuevoArticulo(this.item, this.fileToUpload).subscribe(data => {
         if (data == 'success') {
           var modal = document.getElementById("closeBtn") as any;
           modal.click();

@@ -76,9 +76,11 @@
                                                     es requerido</span>
                                             </p>
                                         </div>
-                                        <div class="form-group col-xs-2 has-danger">
+                                        <div [ngClass]="{'has-danger': stock.invalid }" class="form-group col-xs-2">
                                             <label>Cantidad</label>
-                                            <input type="number" class="form-control" name="stock" [(ngModel)]="item.stock" required>
+                                            <input id="stock" name="stock" type="number" min="1" class="form-control" name="stock" [(ngModel)]="item.stock" required #stock="ngModel">
+                                            <div *ngIf="stock.invalid && (stock.dirty || stock.touched)">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -94,17 +96,37 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group col-xs-4">
+                                            <label>PrecioCompra</label>
+                                            <input type="number" class="form-control" name="compra" [(ngModel)]="item.precioCompra" min="1" required #compra="ngModel">
+                                            <p>
+                                                <span *ngIf="compra.errors?.required" class="label label-danger">Precio
+                                                    compra es requerido</span>
+                                                <span *ngIf="compra.errors?.min" class="label label-danger">El minimo
+                                                    de precio debe ser 1</span>
+                                            </p>
+                                        </div>
+                                        <div class="form-group col-xs-4">
+                                            <label>PrecioVenta</label>
+                                            <input type="number" class="form-control" name="venta" [(ngModel)]="item.precioVenta" min="1" required #venta="ngModel">
+                                            <p>
+                                                <span *ngIf="venta.errors?.required" class="label label-danger">Precio
+                                                    venta es requerido</span>
+                                                <span *ngIf="venta.errors?.min" class="label label-danger">El minimo
+                                                    de precio debe ser 1</span>
+                                            </p>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Descripcion</label>
                                         <textarea class="form-control" rows="3" placeholder="Descripcion ..." name="descripcion" [(ngModel)]="item.descripcion"></textarea>
                                     </div>
                                     <hr>
-                                    <div class="form-group">
+                                    <div class="form-group has-danger">
                                         <label class="image-upload-container btn btn-bwm">
                                             <span>Imagen</span>
-                                            <input #imageInput type="file" accept="image/*"
-                                                (change)="processFile(imageInput)">
+                                            <input type="file" accept="image/*"
+                                                (change)="processFile($event.target.files)" required>
                                         </label>
                                         <!-- <input type="file" name="imagen" [(ngModel)]="item.imagen" id="exampleInputFile"> -->
                                     </div>
