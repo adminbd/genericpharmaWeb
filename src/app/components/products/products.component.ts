@@ -158,8 +158,8 @@ export class ProductsComponent implements OnInit {
       idPaquete: art.IdPaquete,
       idClasificacion: art.IdClasificacion,
       idProveedor: art.IdProveedor,
-      precioCompra: art.precioCompra,
-      precioVenta: art.precioVenta
+      precioCompra: art.PrecioCompra,
+      precioVenta: art.PrecioVenta
     };
   }
 

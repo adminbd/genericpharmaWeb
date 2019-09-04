@@ -96,24 +96,22 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-xs-4">
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-2 has-danger texboxPrecio">
                                             <label>PrecioCompra</label>
-                                            <input type="number" class="form-control" name="compra" [(ngModel)]="item.precioCompra" min="1" required #compra="ngModel">
+                                            <input type="number" class="form-control" name="precioCompra" [(ngModel)]="item.precioCompra" min="1" #precioCompra="ngModel" required>
                                             <p>
-                                                <span *ngIf="compra.errors?.required" class="label label-danger">Precio
-                                                    compra es requerido</span>
-                                                <span *ngIf="compra.errors?.min" class="label label-danger">El minimo
-                                                    de precio debe ser 1</span>
+                                                <span *ngIf="precioCompra.errors?.required" class="label label-danger">P.compra requerido</span>
+                                                <span *ngIf="precioCompra.errors?.min" class="label label-danger">Minimo 1</span>
                                             </p>
                                         </div>
-                                        <div class="form-group col-xs-4">
+                                        <div class="form-group col-xs-2 has-danger texboxPrecio">
                                             <label>PrecioVenta</label>
-                                            <input type="number" class="form-control" name="venta" [(ngModel)]="item.precioVenta" min="1" required #venta="ngModel">
+                                            <input type="number" class="form-control" name="precioVenta" [(ngModel)]="item.precioVenta" min="1" #precioVenta="ngModel" required>
                                             <p>
-                                                <span *ngIf="venta.errors?.required" class="label label-danger">Precio
-                                                    venta es requerido</span>
-                                                <span *ngIf="venta.errors?.min" class="label label-danger">El minimo
-                                                    de precio debe ser 1</span>
+                                                <span *ngIf="precioVenta.errors?.required" class="label label-danger">P.venta requerido</span>
+                                                <span *ngIf="precioVenta.errors?.min" class="label label-danger">Minimo 1</span>
                                             </p>
                                         </div>
                                     </div>
