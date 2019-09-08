@@ -50,14 +50,14 @@
             </div>
             <!-- /.box -->
             <!-- ******************* SECCION DEL MODAL ****************************** -->
-            <div [hidden]="isModalShow" class="modal fade" id="modal-default">
+            <div class="modal fade" id="modal-default">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="box box-success">
                             <div class="box-header with-border">
                                 <h3 class="box-title">{{ titleModal }}</h3>
                             </div>
-                            <form role="form" (ngSubmit)="guardar(forma)" #forma="ngForm" novalidate="">
+                            <form role="form" (ngSubmit)="guardar()" #forma="ngForm" novalidate="">
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="form-group col-xs-6 has-danger" [ngClass]="{'ng-invalid': nombre.errors?.required }">
