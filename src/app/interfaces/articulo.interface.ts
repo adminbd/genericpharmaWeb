@@ -7,5 +7,8 @@ export interface Articulo {
     imagen: string,
     vencimiento: Date,
     idPaquete: string,
-    idClasificacion: string
+    idClasificacion: string,
+    idProveedor?: any,
+    precioCompra: number,
+    precioVenta: number,
 }

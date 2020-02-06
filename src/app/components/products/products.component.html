@@ -1,147 +1,176 @@
 <!-- Main content -->
 <app-content-header></app-content-header>
 <section class="content container-fluid">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="box animated fadeIn medium-fast">
-        <div class="box-header with-border">
-          <button type="button" class="btn btn-success" (click)="nuevoProducto()" data-toggle="modal"
-            data-target="#modal-default">
-            Agregar articulo
-          </button>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <div class="box-tools">
-            <div class="input-group input-group-md pull-right" style="width: 300px; margin-bottom: 10px">
-              <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar">
-
-              <div class="input-group-btn">
-                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-              </div>
-            </div>
-          </div>
-          <table class="table table-striped table-bordered" style="width:100%">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let us of dtItems">
-                <td>{{ us.Id }}</td>
-                <td>{{ us.Nombre }}</td>
-                <td>{{ us.Descripcion }}</td>
-                <td><button type="button" (click)="showMsg(us)" class="btn btn-outline-primary" data-toggle="modal"
-                    data-target="#modal-default">Editar</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="box-footer clearfix">
-          <ul class="pagination pagination-md no-margin pull-right">
-            <li><a>&laquo;</a></li>
-            <li><a>1</a></li>
-            <li><a>2</a></li>
-            <li><a>3</a></li>
-            <li><a>&raquo;</a></li>
-          </ul>
-        </div>
-        <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
-      <!-- ******************* SECCION DEL MODAL ****************************** -->
-      <div [hidden]="isModalShow" class="modal fade" id="modal-default">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="box box-success">
-              <div class="box-header with-border">
-                <h3 class="box-title">{{ titleModal }}</h3>
-              </div>
-              <form role="form" (ngSubmit)="guardar(forma)" #forma="ngForm" novalidate="">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box animated fadeIn medium-fast">
+                <div class="box-header with-border">
+                    <button type="button" class="btn btn-success" (click)="newItem()" data-toggle="modal" data-target="#modal-default">
+                        Agregar articulo
+                    </button>
+                </div>
+                <!-- /.box-header -->
                 <div class="box-body">
-                  <div class="row">
-                    <div class="form-group col-xs-6 has-danger" [ngClass]="{'ng-invalid': nombre.errors?.required }">
-                      <label>Nombre</label>
-                      <input type="text" class="form-control" name="nombre" [(ngModel)]="item.nombre" required
-                        maxlength="150" autocomplete="off" #nombre="ngModel">
-                      <p>
-                        <span *ngIf="nombre.errors?.required" class="label label-danger">Nombre es requerido</span>
-                      </p>
-                    </div>
-                    <div class="form-group col-xs-4 has-danger">
-                      <label>Codigo</label>
-                      <input type="text" class="form-control" name="codigo" [(ngModel)]="item.codigo" required
-                        maxlength="50" autocomplete="off" #codigo="ngModel">
-                      <p>
-                        <span *ngIf="codigo.errors?.required" class="label label-danger">Codigo es requerido</span>
-                      </p>
-                    </div>
-                    <div class="form-group col-xs-2 has-danger">
-                      <label>Cantidad</label>
-                      <input type="number" class="form-control" name="stock" [(ngModel)]="item.stock" required>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-xs-4">
-                      <label>Fecha vencimiento:</label>
-                      <div class="input-group date">
-                        <div class="input-group-addon">
-                          <i class="fa fa-calendar"></i>
+                    <div class="box-tools">
+                        <div class="input-group input-group-md pull-right" style="width: 300px; margin-bottom: 10px">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar">
+
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
                         </div>
-                        <input type="date" [(ngModel)]="item.vencimiento" name="vencimiento"
-                          class="form-control pull-right" #vencimiento="ngModel" required>
-                      </div>
-                      <p>
-                        <span *ngIf="vencimiento.errors?.required" class="label label-danger">Fecha vencimiento es
-                          requerido</span>
-                      </p>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label>Descripcion</label>
-                    <textarea class="form-control" rows="3" placeholder="Descripcion ..." name="descripcion"
-                      [(ngModel)]="item.descripcion"></textarea>
-                  </div>
-                  <hr>
-                  <div class="form-group">
-                    <label>Imagen</label>
-                    <input type="file" name="imagen" [(ngModel)]="item.imagen" id="exampleInputFile">
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-xs-6">
-                      <label>Paquete</label>
-                      <select name="paquete" [(ngModel)]="item.idPaquete" class="form-control" required>
-                        <option value="">Seleccione un paquete</option>
-                        <option *ngFor="let paquete of paquetes" [value]="paquete.Id">{{ paquete.Descripcion }}</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-xs-6">
-                      <label>Clasificacion</label>
-                      <select name="clasificacion" [(ngModel)]="item.idClasificacion" class="form-control" required>
-                        <option value="">Indique la clasificacion</option>
-                        <option *ngFor="let clasi of clasificacion" [value]="clasi.Id">{{ clasi.Descripcion }}</option>
-                      </select>
-                    </div>
-                  </div>
+                    <table class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Cantidad</th>
+                                <th>Descripcion</th>
+                                <th>Fecha caducidad</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let art of dtItems">
+                                <td>{{ art.Id }}</td>
+                                <td>{{ art.Nombre }}</td>
+                                <td>{{ art.Stock }}</td>
+                                <td>{{ art.Descripcion }}</td>
+                                <td>{{ art.Vencimiento | date:'d-MMM-y' }}</td>
+                                <td><button type="button" (click)="editItem(art)" class="btn btn-success btn-flat btnStyles" data-toggle="modal" data-target="#modal-default">Editar</button>
+                                    <button type="button" (click)="deleteItem(art)" class="btn btn-danger btn-flat btnStyles">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="box-footer">
-                  <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                  <button [disabled]="!forma.valid" type="submit" id="saveBtn" class="btn btn-info pull-right">Guardar</button>
-                </div>
-              </form>
+
+                <!-- /.box-body -->
             </div>
-          </div>
+            <!-- /.box -->
+            <!-- ******************* SECCION DEL MODAL ****************************** -->
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">{{ titleModal }}</h3>
+                            </div>
+                            <form role="form" (ngSubmit)="guardar()" #forma="ngForm" novalidate="">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="form-group col-xs-6 has-danger" [ngClass]="{'ng-invalid': nombre.errors?.required }">
+                                            <label>Nombre</label>
+                                            <input type="text" class="form-control" name="nombre" [(ngModel)]="item.nombre" required maxlength="150" autocomplete="off" #nombre="ngModel">
+                                            <p>
+                                                <span *ngIf="nombre.errors?.required" class="label label-danger">Nombre
+                                                    es requerido</span>
+                                            </p>
+                                        </div>
+                                        <div class="form-group col-xs-4 has-danger">
+                                            <label>Codigo</label>
+                                            <input type="text" class="form-control" name="codigo" [(ngModel)]="item.codigo" required maxlength="50" autocomplete="off" #codigo="ngModel">
+                                            <p>
+                                                <span *ngIf="codigo.errors?.required" class="label label-danger">Codigo
+                                                    es requerido</span>
+                                            </p>
+                                        </div>
+                                        <div [ngClass]="{'has-danger': stock.invalid }" class="form-group col-xs-2">
+                                            <label>Cantidad</label>
+                                            <input id="stock" name="stock" type="number" min="1" class="form-control" name="stock" [(ngModel)]="item.stock" required #stock="ngModel">
+                                            <div *ngIf="stock.invalid && (stock.dirty || stock.touched)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-inline">
+                                            <div class="form-group col-xs-4">
+                                                <label>Fecha vencimiento:</label>
+                                                <div class="input-group" style="display: -webkit-inline-box;">
+                                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" required>
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
+                                                                class="fa fa-calendar"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-2 has-danger texboxPrecio">
+                                            <label>PrecioCompra</label>
+                                            <input type="number" class="form-control" name="precioCompra" [(ngModel)]="item.precioCompra" min="1" #precioCompra="ngModel" required>
+                                            <p>
+                                                <span *ngIf="precioCompra.errors?.required" class="label label-danger">P.compra requerido</span>
+                                                <span *ngIf="precioCompra.errors?.min" class="label label-danger">Minimo 1</span>
+                                            </p>
+                                        </div>
+                                        <div class="form-group col-xs-2 has-danger texboxPrecio">
+                                            <label>PrecioVenta</label>
+                                            <input type="number" class="form-control" name="precioVenta" [(ngModel)]="item.precioVenta" min="1" #precioVenta="ngModel" required>
+                                            <p>
+                                                <span *ngIf="precioVenta.errors?.required" class="label label-danger">P.venta requerido</span>
+                                                <span *ngIf="precioVenta.errors?.min" class="label label-danger">Minimo 1</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Descripcion</label>
+                                        <textarea class="form-control" rows="3" placeholder="Descripcion ..." name="descripcion" [(ngModel)]="item.descripcion"></textarea>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group has-danger">
+                                        <label class="image-upload-container btn btn-bwm">
+                                            <span>Imagen</span>
+                                            <input type="file" accept="image/*"
+                                                (change)="processFile($event.target.files)" required>
+                                        </label>
+                                        <!-- <input type="file" name="imagen" [(ngModel)]="item.imagen" id="exampleInputFile"> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-6">
+                                            <label>Paquete</label>
+                                            <select name="paquete" [(ngModel)]="item.idPaquete" class="form-control" required>
+                                                <option value="">Seleccione un paquete</option>
+                                                <option *ngFor="let paquete of paquetes" [value]="paquete.Id">
+                                                    {{ paquete.Descripcion }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-xs-6">
+                                            <label>Clasificacion</label>
+                                            <select name="clasificacion" [(ngModel)]="item.idClasificacion" class="form-control" required>
+                                                <option value="">Indique la clasificacion</option>
+                                                <option *ngFor="let clasi of clasificacion" [value]="clasi.Id">
+                                                    {{ clasi.Descripcion }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-6">
+                                            <label>Proveedor</label>
+                                            <select name="proveedor" [(ngModel)]="item.idProveedor" class="form-control" required>
+                                                <option value="">Seleccione el proveedor</option>
+                                                <option *ngFor="let prov of proveedores" [value]="prov.Id">
+                                                    {{ prov.Nombre }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    <button [disabled]="!forma.valid" type="submit" id="saveBtn" class="btn btn-info pull-right">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- ******************* FIN SECCION DEL MODAL ****************************** -->
         </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- ******************* FIN SECCION DEL MODAL ****************************** -->
+        <!-- /.col -->
     </div>
-    <!-- /.col -->
-  </div>
-  <!-- /.row -->
+    <!-- /.row -->
 </section>
 <!-- /.content -->

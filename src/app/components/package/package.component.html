@@ -1,0 +1,79 @@
+<app-content-header></app-content-header>
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box animated fadeIn medium-fast">
+                <div class="box-header with-border">
+                    <button type="button" class="btn btn-success" (click)="newPackage()" data-toggle="modal" data-target="#modal-default">
+                        Agregar paquete
+                    </button>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="box-tools">
+                        <div class="input-group input-group-md pull-right" style="width: 300px; margin-bottom: 10px">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar">
+
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Nombre paquete</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pkg  of dtPackages">
+                                <td>{{ pkg.Descripcion }}</td>
+                                <td><button type="button" (click)="editPackage(pkg)" class="btn btn-success btn-flat btnStyles" data-toggle="modal" data-target="#modal-default">Editar</button>
+                                    <button type="button" (click)="deletePackage(pkg)" class="btn btn-danger btn-flat btnStyles">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+            <!-- ******************* SECCION DEL MODAL ****************************** -->
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">{{ titleModal }}</h3>
+                            </div>
+                            <form role="form" (ngSubmit)="guardar()" #forma="ngForm" novalidate="">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="form-group col-xs-6 has-danger" [ngClass]="{'ng-invalid': descripcion.errors?.required }">
+                                            <label>Nombre paquete</label>
+                                            <input type="text" class="form-control" name="descripcion" [(ngModel)]="package.descripcion" required maxlength="150" autocomplete="off" #descripcion="ngModel">
+                                            <p>
+                                                <span *ngIf="descripcion.errors?.required" class="label label-danger">Nombre paquete es requerido</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    <button [disabled]="!forma.valid" type="submit" id="saveBtn" class="btn btn-info pull-right">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- ******************* FIN SECCION DEL MODAL ****************************** -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

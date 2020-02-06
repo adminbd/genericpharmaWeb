@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { API_URL } from '../constants';
 import { Articulo } from '../interfaces/articulo.interface';
-const requestArti = "Articulos/";
+import { environment } from '../../environments/environment';
+let headers = new HttpHeaders({
+  'Content-Type': 'application/json'
+});
 
 @Injectable()
 export class ArticulosService {
@@ -10,25 +12,36 @@ export class ArticulosService {
 
 
   getArticulos() {
-    return this.http.get(API_URL + requestArti);
+    return this.http.get(environment.apiURL + '/Articulos').toPromise();
   }
 
   getPaquete() {
-    const request = "Paquete/";
-    return this.http.get(API_URL + request);
+    return this.http.get(environment.apiURL + '/Paquete').toPromise();
   }
 
   getClasificacion() {
-    const request = "Clasificacion/";
-    return this.http.get(API_URL + request);
+    return this.http.get(environment.apiURL + '/Clasificacion').toPromise();
   }
 
-  nuevoArticulo(articulo: Articulo) {
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.post(API_URL + requestArti, articulo, { headers });
+  getProveedor() {
+    return this.http.get(environment.apiURL + '/Proveedor');
   }
 
+  nuevoArticulo(articulo: Articulo, file: File) {
+    const formData: FormData = new FormData();
+    const mData = JSON.stringify(articulo);
+    formData.append('data', mData);
+    if (file) {
+      formData.append('file', file, file.name);
+    }
+    return this.http.post(environment.apiURL + '/UploadImage', formData);
+  }
+
+  editarArticulo(articulo: Articulo) {
+    return this.http.put(environment.apiURL + '/Articulos/' + articulo.id, articulo, { headers });
+  }
+
+  eliminarArticulo(idItem: any) {
+    return this.http.delete(environment.apiURL + '/Articulos/' + idItem);
+  }
 }
