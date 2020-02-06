@@ -9,6 +9,10 @@
     margin-bottom: 5px;
 }
 
+.texboxPrecio {
+    margin: 3px 22px;
+}
+
 #awesomeImg {
     position: relative;
     top: 70px;

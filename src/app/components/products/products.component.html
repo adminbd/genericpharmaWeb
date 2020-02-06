@@ -39,32 +39,25 @@
                                 <td>{{ art.Descripcion }}</td>
                                 <td>{{ art.Vencimiento | date:'d-MMM-y' }}</td>
                                 <td><button type="button" (click)="editItem(art)" class="btn btn-success btn-flat btnStyles" data-toggle="modal" data-target="#modal-default">Editar</button>
-                                    <button type="button" (click)="deleteItem(art)" class="btn btn-danger btn-flat btnStyles">Eliminar</button></td>
+                                    <button type="button" (click)="deleteItem(art)" class="btn btn-danger btn-flat btnStyles">Eliminar</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="box-footer clearfix">
-                    <ul class="pagination pagination-md no-margin pull-right">
-                        <li><a>&laquo;</a></li>
-                        <li><a>1</a></li>
-                        <li><a>2</a></li>
-                        <li><a>3</a></li>
-                        <li><a>&raquo;</a></li>
-                    </ul>
-                </div>
+
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
             <!-- ******************* SECCION DEL MODAL ****************************** -->
-            <div [hidden]="isModalShow" class="modal fade" id="modal-default">
+            <div class="modal fade" id="modal-default">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="box box-success">
                             <div class="box-header with-border">
                                 <h3 class="box-title">{{ titleModal }}</h3>
                             </div>
-                            <form role="form" (ngSubmit)="guardar(forma)" #forma="ngForm" novalidate="">
+                            <form role="form" (ngSubmit)="guardar()" #forma="ngForm" novalidate="">
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="form-group col-xs-6 has-danger" [ngClass]="{'ng-invalid': nombre.errors?.required }">
@@ -83,9 +76,11 @@
                                                     es requerido</span>
                                             </p>
                                         </div>
-                                        <div class="form-group col-xs-2 has-danger">
+                                        <div [ngClass]="{'has-danger': stock.invalid }" class="form-group col-xs-2">
                                             <label>Cantidad</label>
-                                            <input type="number" class="form-control" name="stock" [(ngModel)]="item.stock" required>
+                                            <input id="stock" name="stock" type="number" min="1" class="form-control" name="stock" [(ngModel)]="item.stock" required #stock="ngModel">
+                                            <div *ngIf="stock.invalid && (stock.dirty || stock.touched)">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -102,16 +97,34 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-2 has-danger texboxPrecio">
+                                            <label>PrecioCompra</label>
+                                            <input type="number" class="form-control" name="precioCompra" [(ngModel)]="item.precioCompra" min="1" #precioCompra="ngModel" required>
+                                            <p>
+                                                <span *ngIf="precioCompra.errors?.required" class="label label-danger">P.compra requerido</span>
+                                                <span *ngIf="precioCompra.errors?.min" class="label label-danger">Minimo 1</span>
+                                            </p>
+                                        </div>
+                                        <div class="form-group col-xs-2 has-danger texboxPrecio">
+                                            <label>PrecioVenta</label>
+                                            <input type="number" class="form-control" name="precioVenta" [(ngModel)]="item.precioVenta" min="1" #precioVenta="ngModel" required>
+                                            <p>
+                                                <span *ngIf="precioVenta.errors?.required" class="label label-danger">P.venta requerido</span>
+                                                <span *ngIf="precioVenta.errors?.min" class="label label-danger">Minimo 1</span>
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label>Descripcion</label>
                                         <textarea class="form-control" rows="3" placeholder="Descripcion ..." name="descripcion" [(ngModel)]="item.descripcion"></textarea>
                                     </div>
                                     <hr>
-                                    <div class="form-group">
+                                    <div class="form-group has-danger">
                                         <label class="image-upload-container btn btn-bwm">
                                             <span>Imagen</span>
-                                            <input #imageInput type="file" accept="image/*"
-                                                (change)="processFile(imageInput)">
+                                            <input type="file" accept="image/*"
+                                                (change)="processFile($event.target.files)" required>
                                         </label>
                                         <!-- <input type="file" name="imagen" [(ngModel)]="item.imagen" id="exampleInputFile"> -->
                                     </div>
@@ -130,6 +143,16 @@
                                                 <option value="">Indique la clasificacion</option>
                                                 <option *ngFor="let clasi of clasificacion" [value]="clasi.Id">
                                                     {{ clasi.Descripcion }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-6">
+                                            <label>Proveedor</label>
+                                            <select name="proveedor" [(ngModel)]="item.idProveedor" class="form-control" required>
+                                                <option value="">Seleccione el proveedor</option>
+                                                <option *ngFor="let prov of proveedores" [value]="prov.Id">
+                                                    {{ prov.Nombre }}</option>
                                             </select>
                                         </div>
                                     </div>

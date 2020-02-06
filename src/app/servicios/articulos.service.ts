@@ -23,8 +23,18 @@ export class ArticulosService {
     return this.http.get(environment.apiURL + '/Clasificacion').toPromise();
   }
 
-  nuevoArticulo(articulo: Articulo) {
-    return this.http.post(environment.apiURL + '/Articulos', articulo, { headers });
+  getProveedor() {
+    return this.http.get(environment.apiURL + '/Proveedor');
+  }
+
+  nuevoArticulo(articulo: Articulo, file: File) {
+    const formData: FormData = new FormData();
+    const mData = JSON.stringify(articulo);
+    formData.append('data', mData);
+    if (file) {
+      formData.append('file', file, file.name);
+    }
+    return this.http.post(environment.apiURL + '/UploadImage', formData);
   }
 
   editarArticulo(articulo: Articulo) {
@@ -34,5 +44,4 @@ export class ArticulosService {
   eliminarArticulo(idItem: any) {
     return this.http.delete(environment.apiURL + '/Articulos/' + idItem);
   }
-
 }
