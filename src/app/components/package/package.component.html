@@ -28,7 +28,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let pkg  of dtPackages">
-                                <td>{{ pkg.Descripcion }}</td>
+                                <td>{{ pkg.descripcion }}</td>
                                 <td><button type="button" (click)="editPackage(pkg)" class="btn btn-success btn-flat btnStyles" data-toggle="modal" data-target="#modal-default">Editar</button>
                                     <button type="button" (click)="deletePackage(pkg)" class="btn btn-danger btn-flat btnStyles">Eliminar</button>
                                 </td>

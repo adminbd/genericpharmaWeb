@@ -36,10 +36,11 @@ export class PackageComponent implements OnInit {
   }
 
   loadDataPackage() {
-    this._paqueteService.getPaquetes().then(data => {
+    this._paqueteService.getPaquetes().then((data: any) => {
       this.dtPackages = [];
-      for (let key$ in data) {
-        this.dtPackages.push(data[key$]);
+      const paquetes = data.paquetes;
+      for (let key$ in paquetes) {
+        this.dtPackages.push(paquetes[key$]);
       }
     });
   }
@@ -61,14 +62,14 @@ export class PackageComponent implements OnInit {
     this.titleModal = "Editar paquete";
     this.package = {
       id: pkg.Id,
-      descripcion: pkg.Descripcion,
+      descripcion: pkg.descripcion,
       activo: true
     }
   }
 
   deletePackage(pkg: any) {
     Swal.fire({
-      title: `Desea eliminar ${pkg.Descripcion}?`,
+      title: `Desea eliminar ${pkg.descripcion}?`,
       text: "Esta accion no puede revertirse!",
       type: 'warning',
       showCancelButton: true,
@@ -78,8 +79,8 @@ export class PackageComponent implements OnInit {
       confirmButtonText: 'Eliminar!'
     }).then((result) => {
       if (result.value) {
-        this._paqueteService.eliminarPaquete(pkg.Id).subscribe((res: ResponseInfo) => {
-          if (res.status == 'success') {
+        this._paqueteService.eliminarPaquete(pkg.id).subscribe((res: any) => {
+          if (res.status == 200) {
             Swal.fire(
               'Eliminado!',
               res.message,
@@ -109,28 +110,26 @@ export class PackageComponent implements OnInit {
       /** CREAR */
 
       // ejecuta el servicio para guardar la informacion en el servidor
-      this._paqueteService.nuevoPaquete(this.package).subscribe((data: ResponseInfo) => {
-        if (data.status == 'success') {
+      this._paqueteService.nuevoPaquete(this.package).subscribe((data: any) => {
+        if (data.status == 200) {
           var modal = document.getElementById("closeBtn") as any;
           modal.click();
           this.loadDataPackage();
           this.toastr.success(data.message, 'GenePharmaApp', { positionClass: 'toast-bottom-right' });
         } else {
           this.toastr.error(data.message, 'GenePharmaApp');
-          console.log(data);
         }
       });
     } else {
       /** EDITAR */
       this._paqueteService.editarPaquete(this.package).subscribe((data: ResponseInfo) => {
-        if (data.status == 'success') {
+        if (data.status == 200) {
           var modal = document.getElementById("closeBtn") as any;
           modal.click();
           this.loadDataPackage();
           this.toastr.success(data.message, 'GenePharmaApp', { positionClass: 'toast-bottom-right' });
         } else {
           this.toastr.error(data.message, 'GenePharmaApp');
-          console.log(data);
         }
       });
     }

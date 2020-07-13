@@ -4,7 +4,11 @@
 
 export const environment = {
   production: true,
-  apiURL: 'http://localhost:33588/api'
+  // for local
+  // apiURL: 'https://localhost:44353/'
+
+  // for production
+  apiURL: 'http://genepharmanic.somee.com/'
 };
 
 /*
