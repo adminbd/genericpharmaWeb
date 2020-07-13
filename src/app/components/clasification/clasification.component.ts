@@ -80,7 +80,7 @@ export class ClasificationComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this._clasificationService.eliminarClasificacion(clas.Id).subscribe((res: ResponseInfo) => {
-          if (res.status == 'success') {
+          if (res.status == 200) {
             Swal.fire(
               'Eliminado!',
               res.message,
@@ -111,7 +111,7 @@ export class ClasificationComponent implements OnInit {
 
       // ejecuta el servicio para guardar la informacion en el servidor
       this._clasificationService.nuevaClasificacion(this.clasification).subscribe((data: ResponseInfo) => {
-        if (data.status == 'success') {
+        if (data.status == 200) {
           var modal = document.getElementById("closeBtn") as any;
           modal.click();
           this.loadDataClasification();
@@ -124,7 +124,7 @@ export class ClasificationComponent implements OnInit {
     } else {
       /** EDITAR */
       this._clasificationService.editarClasificacion(this.clasification).subscribe((data: ResponseInfo) => {
-        if (data.status == 'success') {
+        if (data.status == 200) {
           var modal = document.getElementById("closeBtn") as any;
           modal.click();
           this.loadDataClasification();

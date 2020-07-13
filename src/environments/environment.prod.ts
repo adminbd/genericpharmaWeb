@@ -1,4 +1,11 @@
 export const environment = {
   production: true,
-  apiURL: 'http://localhost:33588/api'
+
+  // development
+  // apiURL: 'https://localhost:44353/'
+
+  // production
+  apiURL: 'http://genepharmanic.somee.com/'
+
 };
+// apiURL: 'http://localhost:8090/api'
