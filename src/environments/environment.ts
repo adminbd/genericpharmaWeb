@@ -8,7 +8,7 @@ export const environment = {
   // apiURL: 'https://localhost:44353/'
 
   // for production
-  apiURL: 'http://genepharmanic.somee.com/'
+  apiURL: 'https://genepharmanic.somee.com/'
 };
 
 /*
